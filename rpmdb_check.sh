@@ -153,7 +153,16 @@ check_basesystem_yumhistory()
 
 check_packages_around()
 {
-  # PACKAGES_FILE="/var/lib/rpm/Packages"
+  if [ -f $local_dir/var/lib/rpm/Packages ]; then
+    # echo "rhel8"
+    PACKAGES_FILE="$local_dir/var/lib/rpm/Packages"
+  elif [ -f $local_dir/var/lib/rpm/rpmdb.sqlite ]; then
+    # echo "rhel9+"
+    PACKAGES_FILE="$local_dir/var/lib/rpm/rpmdb.sqlite"
+  else
+    echo "file not found"
+  fi
+
   # Checking the Packages file
   echo -e "\n## Checking the Packages file"
   echo
@@ -233,7 +242,6 @@ elif [ "$1" == "--data" ] && [ "$2" != "" ]; then
     RPM_CMD="rpm --root=$local_dir"
     PACKAGE_CLEANUP_CMD="package-cleanup --installroot=$local_dir"
     LSOF_CHECK=False
-    PACKAGES_FILE="$local_dir/var/lib/rpm/Packages"
 
     # Calling the main function
     main_func
