@@ -190,14 +190,14 @@ check_packages_around()
 main_func()
 {
   # Main section here
-#  check_requirements
-#  check_corrupt_rpmdb
-#  count_rpmdb_entries
-#  check_duplicate_entries
-#  check_duplicate_entries_package_cleanup
-#  lsof_rpmdb_files
-#  check_dependencies_problems
-#  check_basesystem_yumhistory
+  check_requirements
+  check_corrupt_rpmdb
+  count_rpmdb_entries
+  check_duplicate_entries
+  check_duplicate_entries_package_cleanup
+  lsof_rpmdb_files
+  check_dependencies_problems
+  check_basesystem_yumhistory
   check_packages_around
 }
 
@@ -242,7 +242,6 @@ elif [ "$1" == "--data" ] && [ "$2" != "" ]; then
     RPM_CMD="rpm --root=$local_dir"
     PACKAGE_CLEANUP_CMD="package-cleanup --installroot=$local_dir"
     LSOF_CHECK=False
-  #  PACKAGES_FILE="$local_dir/var/lib/rpm/Packages"
 
     # Calling the main function
     main_func
